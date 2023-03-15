@@ -10,7 +10,11 @@ const categorySchema = new mongoose.Schema<ICategory>(
     description: {
       type: String,
       required: true,
-    }
+    },
+    imgUrl: {
+      type: String,
+      required: true,
+    },
   }, {
   timestamps: {
     createdAt: 'created_at',
