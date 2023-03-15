@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from "express";
-import { generateAuthToken, extractUserFromToken } from "../helpers/generateAuthToken";
+import { generateAuthToken } from "../helpers/generateAuthToken";
 import User from "../models/User";
 import bcrypt from "bcrypt";
+import CustomError from "../helpers/CustomError";
 
 interface ILogin {
   email: string;
@@ -32,11 +33,11 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
     const { email, password }: ILogin = req.body;
     const user: any = await User.findOne({ email });
     if (!user) {
-      throw Error('Invalid credentials: Email not found');
+      throw new CustomError('Invalid credentials: Email not found', 401);
     }
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      throw Error('Invalid credentials: Password is incorrect');
+      throw new CustomError('Invalid credentials: Password is incorrect', 401);
     }
     const token = await generateAuthToken(user);
     res.status(200).json({ user, token });
