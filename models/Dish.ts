@@ -5,6 +5,7 @@ const dishSchema = new mongoose.Schema<IDishes>({
   name: {
     type: String,
     required: true,
+    unique: true,
   },
   description: {
     type: String,
