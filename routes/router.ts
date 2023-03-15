@@ -6,7 +6,7 @@ import DishRoute from "./Dish";
 
 const router = Router();
 
-router.use('/users', UserRoute);
+router.use('/auth', UserRoute);
 router.use('/categories', CategoryRoute);
 router.use('/restaurants', RestaurantRoute);
 router.use('/dishes', DishRoute);
