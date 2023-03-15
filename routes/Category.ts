@@ -1,7 +1,17 @@
 import { Router } from "express";
-import { getAllCategories, getCategory, addCategory, getCategoryByName, updateCategory, deleteCategory } from "../controllers/Category";
+import {
+  getAllCategories,
+  getCategory,
+  addCategory,
+  getCategoryByName,
+  updateCategory,
+  deleteCategory
+} from "../controllers/Category";
+import { auth } from "../middleware/auth"
 
-const api = Router();
+const api = Router()
+
+api.use(auth)
 
 api.get('/', getAllCategories);
 api.get('/:id', getCategory);
